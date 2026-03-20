@@ -40,3 +40,11 @@ flowable:
   check-process-definitions: false  #禁用 /resources/processes 自动部署 BPMN XML 流程
   idm:
     enabled: false # 禁用Flowable的IDM模块
+
+
+# MyBatis-Plus 全局配置（与各 profile 的 mybatis-plus 配置合并）
+mybatis-plus:
+  global-config:
+    db-config:
+      # 全量更新：前端传过来的数据直接更新，null 也会写入数据库（覆盖默认的 NOT_NULL 忽略策略）
+      update-strategy: ignored

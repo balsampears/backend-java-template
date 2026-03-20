@@ -22,7 +22,7 @@ ruoyi:
 # 日志配置
 logging:
   level:
-    com.ftechain: debug
+    com.balsam: debug
     org.springframework: warn
 
 # rocketmq
@@ -60,7 +60,7 @@ spring:
   devtools:
     restart:
       # 热部署开关
-      enabled: true
+      enabled: false
   # redis 配置
   redis:
     # 地址
