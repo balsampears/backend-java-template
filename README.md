@@ -196,6 +196,23 @@ rocketmq:
 
 未使用可注释或删除该配置块。
 
+### 10) Aliyun OSS（可选）
+
+**文件**：各环境 `application-*.yml`
+
+```yaml
+aliyun:
+  oss:
+    endpoint: oss-cn-shenzhen.aliyuncs.com
+    endpointView: oss-cn-shenzhen.aliyuncs.com
+    endpointImg: oss-cn-shenzhen.aliyuncs.com
+    accessKeyId:
+    accessKeySecret:
+    bucketName:
+    fileDir: 
+```
+
+未使用可注释或删除该配置块。
 ---
 
 ## 生产环境上线前检查

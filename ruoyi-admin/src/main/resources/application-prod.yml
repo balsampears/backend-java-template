@@ -183,6 +183,15 @@ xss:
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
 
+aliyun:
+  oss:
+    endpoint: oss-cn-shenzhen.aliyuncs.com
+    endpointView: oss-cn-shenzhen.aliyuncs.com
+    endpointImg: oss-cn-shenzhen.aliyuncs.com
+    accessKeyId:
+    accessKeySecret:
+    bucketName:
+    fileDir:
 
 
 
