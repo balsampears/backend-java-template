@@ -1,9 +1,9 @@
 package com.balsam.system.common.core.domain.entity;
 
 import java.util.Set;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import com.balsam.system.common.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;

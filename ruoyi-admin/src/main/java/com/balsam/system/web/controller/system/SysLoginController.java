@@ -27,7 +27,7 @@ import com.balsam.system.framework.web.service.TokenService;
 import com.balsam.system.system.service.ISysConfigService;
 import com.balsam.system.system.service.ISysMenuService;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 登录验证

@@ -4,13 +4,13 @@
 
 ## 技术栈
 
-- Java 8 / Spring Boot 2.5.15
+- JDK 17 / Spring Boot 3.4.4
 - MyBatis-Plus
 - Spring Security + JWT
 - Redis
 - MySQL 5.7+
 - Druid
-- Knife4j（Swagger 增强）
+- SpringDoc OpenAPI + Knife4j
 
 ## 项目结构
 
@@ -24,7 +24,7 @@
 
 ## 环境要求
 
-- JDK 1.8+
+- JDK 17+
 - Maven 3.6+
 - MySQL 5.7+
 - Redis
@@ -52,7 +52,7 @@ mysql -u root -p < sql/ry_20250522.sql
 编辑 `ruoyi-admin/src/main/resources/application-dev.yml`，至少完成下列配置：
 
 - 数据库：`spring.datasource.druid.master`
-- Redis：`spring.redis`
+- Redis：`spring.data.redis`
 - 上传目录：`ruoyi.profile`
 - 域名：`ruoyi.domain`
 - Token 密钥：`token.secret`
@@ -69,7 +69,7 @@ mvn spring-boot:run -pl ruoyi-admin
 ### 5) 访问地址
 
 - API：`http://localhost:8080/api`
-- Swagger：`http://localhost:8080/api/doc.html`
+- API 文档：`http://localhost:8080/api/doc.html`
 - Druid：`http://localhost:8080/api/druid`（默认 `ruoyi / 123456`）
 
 ### 6) 默认账号
@@ -104,11 +104,12 @@ spring:
 
 ```yaml
 spring:
-  redis:
-    host: localhost
-    port: 6379
-    database: 0
-    password:
+  data:
+    redis:
+      host: localhost
+      port: 6380
+      database: 0
+      password:
 ```
 
 ### 3) 上传目录 `ruoyi.profile`（必改）
@@ -152,11 +153,11 @@ server:
 
 ```yaml
 token:
-  secret: abcdefghijklmnopqrstuvwxyz
+  secret: abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_-
   expireTime: 30
 ```
 
-`token.secret` 在生产环境必须替换为强随机字符串。
+`token.secret` 在生产环境必须替换为不少于 64 字符的强随机字符串，以满足 HS512 签名要求。
 
 ### 7) 环境切换
 
@@ -218,7 +219,7 @@ aliyun:
 ## 生产环境上线前检查
 
 - [ ] 修改 `token.secret`，避免默认值
-- [ ] 关闭 Swagger（`swagger.enabled: false`）
+- [ ] 按需关闭或限制接口文档访问
 - [ ] 收紧 Druid 监控访问策略（账号、密码、白名单）
 - [ ] 使用独立的数据库和 Redis 账号，最小权限
 - [ ] 确认 `ruoyi.profile` 目录权限与磁盘容量
@@ -264,7 +265,7 @@ String password = "password";
 
 ### 启动失败：Redis 连接失败
 
-确认 Redis 已启动，且 `spring.redis.host/port/password` 正确。
+确认 Redis 已启动，且 `spring.data.redis.host/port/password` 正确。
 
 ### 启动失败：数据库连接失败
 
@@ -274,9 +275,9 @@ String password = "password";
 
 确认 `ruoyi.profile` 目录存在且有读写权限。
 
-### Swagger 文档打不开
+### API 文档打不开
 
-检查是否开启 Swagger（开发环境通常为 `swagger.enabled: true`）。
+确认访问的是 `http://localhost:8080/api/doc.html`，并检查 SpringDoc/Knife4j 依赖是否正常加载。
 
 ---
 

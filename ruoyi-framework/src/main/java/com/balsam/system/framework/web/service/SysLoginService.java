@@ -1,6 +1,6 @@
 package com.balsam.system.framework.web.service;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.balsam.system.common.core.domain.AjaxResult;

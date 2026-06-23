@@ -17,6 +17,9 @@ server:
       min-spare: 100
 # 环境配置
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   profiles:
     active: dev
   application:
@@ -40,6 +43,13 @@ flowable:
   check-process-definitions: false  #禁用 /resources/processes 自动部署 BPMN XML 流程
   idm:
     enabled: false # 禁用Flowable的IDM模块
+
+# Knife4j / SpringDoc（Spring Boot 3.4+ 需关闭增强，并单独引入 springdoc-openapi-starter-webmvc-ui）
+knife4j:
+  enable: false
+springdoc:
+  api-docs:
+    enabled: true
 
 
 # MyBatis-Plus 全局配置（与各 profile 的 mybatis-plus 配置合并）

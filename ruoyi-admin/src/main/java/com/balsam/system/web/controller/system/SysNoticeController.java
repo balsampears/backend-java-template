@@ -20,7 +20,7 @@ import com.balsam.system.common.enums.BusinessType;
 import com.balsam.system.system.domain.SysNotice;
 import com.balsam.system.system.service.ISysNoticeService;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 公告 信息操作处理

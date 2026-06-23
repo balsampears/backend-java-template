@@ -14,7 +14,7 @@ import com.balsam.system.common.utils.StringUtils;
 import com.balsam.system.system.service.ISysMenuService;
 import com.balsam.system.system.service.ISysRoleService;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 用户权限处理

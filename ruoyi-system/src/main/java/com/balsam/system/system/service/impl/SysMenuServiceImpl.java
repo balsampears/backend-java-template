@@ -27,7 +27,7 @@ import com.balsam.system.common.core.domain.entity.SysRole;
 import com.balsam.system.common.utils.SecurityUtils;
 import com.balsam.system.common.utils.StringUtils;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 菜单 业务层处理

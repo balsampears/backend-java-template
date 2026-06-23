@@ -2,7 +2,7 @@ package com.balsam.system.common.core.domain.entity;
 
 import java.util.Date;
 import java.util.List;
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 
 import com.balsam.system.common.utils.SecurityUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.balsam.system.common.config.RuoYiConfig;
 import com.balsam.system.common.utils.StringUtils;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 首页

@@ -11,7 +11,7 @@ import com.balsam.system.common.utils.StringUtils;
 import com.balsam.system.system.service.ISysConfigService;
 import com.balsam.system.system.service.ISysUserService;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 注册校验方法

@@ -4,8 +4,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 
 import com.balsam.system.system.mapper.SysDictDataMapper;
 import com.balsam.system.system.mapper.SysDictTypeMapper;

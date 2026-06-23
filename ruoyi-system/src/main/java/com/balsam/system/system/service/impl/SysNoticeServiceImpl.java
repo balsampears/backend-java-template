@@ -8,7 +8,7 @@ import com.balsam.system.system.mapper.SysNoticeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 公告 服务层实现

@@ -4,6 +4,8 @@ import com.alibaba.fastjson2.annotation.JSONField;
 import com.balsam.system.common.core.domain.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
@@ -261,6 +263,6 @@ public class LoginUser implements UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
-        return null;
+        return new ArrayList<>();
     }
 }

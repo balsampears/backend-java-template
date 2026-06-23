@@ -8,7 +8,7 @@ import com.balsam.system.system.domain.SysOperLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 操作日志 服务层处理

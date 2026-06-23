@@ -13,7 +13,7 @@ import com.balsam.system.common.exception.user.UserPasswordRetryLimitExceedExcep
 import com.balsam.system.common.utils.SecurityUtils;
 import com.balsam.system.framework.security.context.AuthenticationContextHolder;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 登录密码方法

@@ -19,7 +19,7 @@ import com.balsam.system.common.exception.ServiceException;
 import com.balsam.system.common.utils.StringUtils;
 import com.balsam.system.common.utils.ip.IpUtils;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 限流处理

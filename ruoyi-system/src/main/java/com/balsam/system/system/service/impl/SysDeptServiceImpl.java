@@ -21,7 +21,7 @@ import com.balsam.system.common.utils.SecurityUtils;
 import com.balsam.system.common.utils.StringUtils;
 import com.balsam.system.common.utils.spring.SpringUtils;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 部门管理 服务实现

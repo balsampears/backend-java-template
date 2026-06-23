@@ -9,7 +9,7 @@ import com.balsam.system.common.core.domain.entity.SysDictData;
 import com.balsam.system.common.utils.DictUtils;
 import com.balsam.system.system.service.ISysDictDataService;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 字典 业务层处理

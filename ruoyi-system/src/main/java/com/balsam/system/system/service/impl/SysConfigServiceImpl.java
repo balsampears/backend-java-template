@@ -2,8 +2,8 @@ package com.balsam.system.system.service.impl;
 
 import java.util.Collection;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 
 import com.balsam.system.system.service.ISysConfigService;
 import com.balsam.system.system.domain.SysConfig;

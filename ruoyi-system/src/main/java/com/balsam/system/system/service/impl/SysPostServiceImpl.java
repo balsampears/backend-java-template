@@ -12,7 +12,7 @@ import com.balsam.system.common.constant.UserConstants;
 import com.balsam.system.common.exception.ServiceException;
 import com.balsam.system.common.utils.StringUtils;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 岗位信息 服务层处理

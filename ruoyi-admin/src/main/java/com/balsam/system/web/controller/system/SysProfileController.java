@@ -26,7 +26,7 @@ import com.balsam.system.common.utils.file.MimeTypeUtils;
 import com.balsam.system.framework.web.service.TokenService;
 import com.balsam.system.system.service.ISysUserService;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 个人信息 业务处理

@@ -22,7 +22,7 @@ import com.balsam.system.common.core.domain.AjaxResult;
 import com.balsam.system.common.utils.StringUtils;
 import com.balsam.system.system.domain.SysCache;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 缓存监控

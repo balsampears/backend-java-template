@@ -23,7 +23,7 @@ import com.balsam.system.common.utils.StringUtils;
 import com.balsam.system.system.domain.SysUserOnline;
 import com.balsam.system.system.service.ISysUserOnlineService;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 在线用户监控

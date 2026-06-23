@@ -3,9 +3,9 @@ package com.balsam.system.web.controller.common;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.balsam.system.common.constant.CacheConstants;
 import org.springframework.beans.factory.annotation.Autowired;

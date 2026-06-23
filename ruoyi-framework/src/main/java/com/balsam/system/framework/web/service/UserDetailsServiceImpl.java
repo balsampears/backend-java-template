@@ -15,7 +15,7 @@ import com.balsam.system.common.utils.MessageUtils;
 import com.balsam.system.common.utils.StringUtils;
 import com.balsam.system.system.service.ISysUserService;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 用户验证处理

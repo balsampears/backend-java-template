@@ -20,26 +20,22 @@ import com.balsam.system.common.service.domain.BatchDocumentDTO;
 import com.balsam.system.common.service.domain.DocumentDTO;
 import com.balsam.system.common.service.domain.DocumentVO;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.annotation.Resource;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Date;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -824,99 +820,6 @@ public class OssServiceImpl implements OssService {
         return vo;
     }
 
-    /**
-     * 根据上传返回的key 返回
-     * 不判断环境
-     *
-     * @param ossKey
-     */
-    public MultipartFile getMultipartFileByKey(String ossKey){
-        LOGGER.info("===================调用OSS下载文件开始=============================");
-        ossKey = ossKeyWrap(ossKey);
-        LOGGER.info("===================传入参数ossKey" + ossKey);
-        MultipartFile multipartFile = null;
-        InputStream in = null;
-        try {
-            OSSClient ossClient = new OSSClient(properties.getEndpoint(), properties.getAccessKeyId(), properties.getAccessKeySecret());
-            OSSObject ossObject = ossClient.getObject(properties.getBucketName(), ossKey);
-            String filename = new String(ossKey.getBytes(StandardCharsets.UTF_8), "ISO8859-1");
-            in = ossObject.getObjectContent();
-            multipartFile = getMultipartFile(in, filename);
-            ossClient.shutdown();
-        } catch (IOException e) {
-            LOGGER.error("Stream copy exception", e);
-            throw new IllegalArgumentException("文件上传失败");
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    LOGGER.error("Stream close exception", e);
-                }
-            }
-        }
-        return multipartFile;
-    }
-
-    /**
-     * 获取封装得MultipartFile
-     *
-     * @param inputStream inputStream
-     * @param fileName    fileName
-     * @return MultipartFile
-     */
-    private MultipartFile getMultipartFile(InputStream inputStream, String fileName) {
-        FileItem fileItem = createFileItem(inputStream, fileName);
-        //CommonsMultipartFile是feign对multipartFile的封装，但是要FileItem类对象
-        return new CommonsMultipartFile(fileItem);
-    }
-
-
-    /**
-     * FileItem类对象创建
-     *
-     * @param inputStream inputStream
-     * @param fileName    fileName
-     * @return FileItem
-     */
-    private FileItem createFileItem(InputStream inputStream, String fileName) {
-        FileItemFactory factory = new DiskFileItemFactory(16, null);
-        String textFieldName = "file";
-        FileItem item = factory.createItem(textFieldName, MediaType.MULTIPART_FORM_DATA_VALUE, true, fileName);
-        int bytesRead = 0;
-        byte[] buffer = new byte[10 * 1024 * 1024];
-        OutputStream os = null;
-        //使用输出流输出输入流的字节
-        try {
-            os = item.getOutputStream();
-            while ((bytesRead = inputStream.read(buffer, 0, 8192)) != -1) {
-                os.write(buffer, 0, bytesRead);
-            }
-            inputStream.close();
-        } catch (IOException e) {
-            LOGGER.error("Stream copy exception", e);
-            throw new IllegalArgumentException("文件上传失败");
-        } finally {
-            if (os != null) {
-                try {
-                    os.close();
-                } catch (IOException e) {
-                    LOGGER.error("Stream close exception", e);
-
-                }
-            }
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    LOGGER.error("Stream close exception", e);
-                }
-            }
-        }
-
-        return item;
-    }
-
     public void preview(String key, HttpServletResponse response) {
         InputStream in = null;
         OSSClient ossClient = new OSSClient(properties.getEndpoint(), properties.getAccessKeyId(), properties.getAccessKeySecret());
@@ -947,4 +850,5 @@ public class OssServiceImpl implements OssService {
             }
         }
     }
+
 }

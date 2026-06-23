@@ -22,7 +22,7 @@ import com.balsam.system.common.enums.BusinessType;
 import com.balsam.system.common.utils.StringUtils;
 import com.balsam.system.system.service.ISysDeptService;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 部门信息

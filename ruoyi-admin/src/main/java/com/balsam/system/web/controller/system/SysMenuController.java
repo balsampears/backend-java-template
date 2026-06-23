@@ -21,7 +21,7 @@ import com.balsam.system.common.enums.BusinessType;
 import com.balsam.system.common.utils.StringUtils;
 import com.balsam.system.system.service.ISysMenuService;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 菜单信息
