@@ -35,6 +35,7 @@
         <lombok.version>1.18.30</lombok.version>
         <jaxb.version>4.0.5</jaxb.version>
         <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
+        <spring-ai.version>1.0.0</spring-ai.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -45,6 +46,15 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring AI -->
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -11,6 +11,7 @@
 - MySQL 5.7+
 - Druid
 - SpringDoc OpenAPI + Knife4j
+- Spring AI（OpenAI 兼容 API，需配置环境变量 `OPENAI_API_KEY`）
 
 ## 项目结构
 

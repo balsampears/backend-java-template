@@ -58,6 +58,12 @@
             <artifactId>oshi-core</artifactId>
         </dependency>
 
+        <!-- Spring AI OpenAI -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-model-openai</artifactId>
+        </dependency>
+
         <!-- 系统模块-->
         <dependency>
             <groupId>com.balsam</groupId>

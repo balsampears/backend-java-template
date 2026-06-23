@@ -24,6 +24,9 @@ spring:
     active: dev
   application:
     name: ruoyi
+  http:
+    client:
+      factory: simple
 
 # Feign配置
 feign:
