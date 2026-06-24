@@ -1,8 +1,12 @@
 package com.balsam.system;
 
+import com.balsam.system.system.tool.MenuTool;
+import org.springframework.ai.tool.ToolCallbackProvider;
+import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 
 /**
  * 启动程序
@@ -26,5 +30,10 @@ public class SystemApplication
                 " |  | \\ `'   /|   `-'  /           \n" +
                 " |  |  \\    /  \\      /           \n" +
                 " ''-'   `'-'    `-..-'              ");
+    }
+
+    @Bean
+    public ToolCallbackProvider testTools(MenuTool menuTool){
+        return MethodToolCallbackProvider.builder().toolObjects(menuTool).build();
     }
 }

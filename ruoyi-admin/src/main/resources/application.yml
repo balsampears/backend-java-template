@@ -27,6 +27,20 @@ spring:
   http:
     client:
       factory: simple
+  ai:
+    mcp:
+      server:
+        name: webmvc-mcp-server
+        version: 1.0.0
+        type: SYNC
+        instructions: "这个服务仅提供MCP服务器的测试"
+        sse-message-endpoint: /mcp/messages
+        capabilities:
+          tool: true
+          resource: true
+          prompt: true
+          completion: true
+
 
 # Feign配置
 feign:

@@ -16,6 +16,14 @@
     </description>
 
     <dependencies>
+
+
+        <!-- Spring AI MCP Server -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
