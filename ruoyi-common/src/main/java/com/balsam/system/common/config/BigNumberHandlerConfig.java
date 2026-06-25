@@ -1,12 +1,11 @@
 package com.balsam.system.common.config;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import org.springframework.boot.jackson.autoconfigure.JsonMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.module.SimpleModule;
+import tools.jackson.databind.ser.std.ToStringSerializer;
 
 import java.math.BigInteger;
 
@@ -19,25 +18,23 @@ import java.math.BigInteger;
 public class BigNumberHandlerConfig {
 
     /**
-     * 解决long类型返回前端丢失精度的问题
-     * @return
+     * 解决 long 类型返回前端丢失精度的问题。
+     * 使用 JsonMapperBuilderCustomizer 而非自定义 MappingJackson2HttpMessageConverter，
+     * 避免破坏默认 HttpMessageConverter 顺序导致 /v3/api-docs 返回 base64 编码。
      */
     @Bean
-    public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter() {
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        ObjectMapper mapper = new ObjectMapper();
-        // 数字转字符串
-        SimpleModule simpleModule = new SimpleModule();
-        simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
-        simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
-        simpleModule.addSerializer(Float.class, ToStringSerializer.instance);
-        simpleModule.addSerializer(Float.TYPE, ToStringSerializer.instance);
-        simpleModule.addSerializer(Double.class, ToStringSerializer.instance);
-        simpleModule.addSerializer(Double.TYPE, ToStringSerializer.instance);
-        simpleModule.addSerializer(BigInteger.class, ToStringSerializer.instance);
-        mapper.registerModule(simpleModule);
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        converter.setObjectMapper(mapper);
-        return converter;
+    public JsonMapperBuilderCustomizer bigNumberJsonCustomizer() {
+        return builder -> {
+            SimpleModule simpleModule = new SimpleModule();
+            simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
+            simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
+            simpleModule.addSerializer(Float.class, ToStringSerializer.instance);
+            simpleModule.addSerializer(Float.TYPE, ToStringSerializer.instance);
+            simpleModule.addSerializer(Double.class, ToStringSerializer.instance);
+            simpleModule.addSerializer(Double.TYPE, ToStringSerializer.instance);
+            simpleModule.addSerializer(BigInteger.class, ToStringSerializer.instance);
+            builder.addModule(simpleModule);
+            builder.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        };
     }
 }
