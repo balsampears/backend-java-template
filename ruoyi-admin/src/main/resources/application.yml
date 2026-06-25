@@ -32,9 +32,11 @@ spring:
       server:
         name: webmvc-mcp-server
         version: 1.0.0
+        protocol: STREAMABLE
         type: SYNC
         instructions: "这个服务仅提供MCP服务器的测试"
-        sse-message-endpoint: /mcp/messages
+        streamable-http:
+          mcp-endpoint: /mcp
         capabilities:
           tool: true
           resource: true
@@ -74,4 +76,4 @@ mybatis-plus:
   global-config:
     db-config:
       # 全量更新：前端传过来的数据直接更新，null 也会写入数据库（覆盖默认的 NOT_NULL 忽略策略）
-      update-strategy: ignored
+      update-strategy: ALWAYS

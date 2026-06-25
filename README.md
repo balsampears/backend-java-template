@@ -4,14 +4,14 @@
 
 ## 技术栈
 
-- JDK 17 / Spring Boot 3.4.4
+- JDK 21 / Spring Boot 4.x
 - MyBatis-Plus
 - Spring Security + JWT
 - Redis
 - MySQL 5.7+
 - Druid
 - SpringDoc OpenAPI + Knife4j
-- Spring AI（OpenAI 兼容 API，需配置环境变量 `OPENAI_API_KEY`）
+- Spring AI 2（OpenAI 兼容 API，内置 MCP Streamable HTTP Server）
 
 ## 项目结构
 
@@ -25,7 +25,7 @@
 
 ## 环境要求
 
-- JDK 17+
+- JDK 21+
 - Maven 3.6+
 - MySQL 5.7+
 - Redis
@@ -72,6 +72,7 @@ mvn spring-boot:run -pl ruoyi-admin
 - API：`http://localhost:8080/api`
 - API 文档：`http://localhost:8080/api/doc.html`
 - Druid：`http://localhost:8080/api/druid`（默认 `ruoyi / 123456`）
+- MCP Streamable HTTP：`http://localhost:8080/api/mcp`
 
 ### 6) 默认账号
 
@@ -184,7 +185,23 @@ logging:
 
 生产建议调整为 `info` 或更高。
 
-### 9) RocketMQ（可选）
+### 9) Spring AI MCP Server
+
+**文件**：`application.yml`
+
+```yaml
+spring:
+  ai:
+    mcp:
+      server:
+        protocol: STREAMABLE
+        streamable-http:
+          mcp-endpoint: /mcp
+```
+
+MCP 使用 Streamable HTTP 传输方式，应用上下文路径为 `/api` 时访问地址为 `http://localhost:8080/api/mcp`。旧版 SSE 的 `/sse` 与 `/mcp/messages` 不再使用。
+
+### 10) RocketMQ（可选）
 
 **文件**：各环境 `application-*.yml`
 
@@ -198,7 +215,7 @@ rocketmq:
 
 未使用可注释或删除该配置块。
 
-### 10) Aliyun OSS（可选）
+### 11) Aliyun OSS（可选）
 
 **文件**：各环境 `application-*.yml`
 
@@ -279,6 +296,10 @@ String password = "password";
 ### API 文档打不开
 
 确认访问的是 `http://localhost:8080/api/doc.html`，并检查 SpringDoc/Knife4j 依赖是否正常加载。
+
+### MCP 连接失败
+
+确认 MCP 客户端使用 Streamable HTTP 传输方式，并连接 `http://localhost:8080/api/mcp`，不要继续使用旧 SSE endpoint。
 
 ---
 

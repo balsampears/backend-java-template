@@ -73,8 +73,7 @@ public class SecurityConfig
     @Bean
     public AuthenticationManager authenticationManager()
     {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return new ProviderManager(daoAuthenticationProvider);
     }
@@ -116,7 +115,7 @@ public class SecurityConfig
                     // 静态资源，可匿名访问
                     .requestMatchers(HttpMethod.GET, "/", "/*.html", "/*.html", "/*.css", "/*.js", "/profile/**").permitAll()
                     .requestMatchers("/doc.html", "/webjars/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/druid/**",
-                            "/sse", "/mcp/**"
+                            "/mcp", "/mcp/**"
                     ).permitAll()
                     // 除上面外的所有请求全部需要鉴权认证
                     .anyRequest().authenticated();

@@ -14,11 +14,14 @@ import com.balsam.system.framework.config.properties.DruidProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.support.jakarta.StatViewServlet;
+import com.alibaba.druid.support.jakarta.WebStatFilter;
 import com.alibaba.druid.util.Utils;
 import com.balsam.system.common.enums.DataSourceType;
 import com.balsam.system.common.utils.spring.SpringUtils;
@@ -34,6 +37,21 @@ public class DruidConfig
 {
     @Value("${spring.datasource.druid.statViewServlet.url-pattern:/druid/*}")
     private String statViewServletUrlPattern;
+
+    @Value("${spring.datasource.druid.statViewServlet.allow:}")
+    private String statViewServletAllow;
+
+    @Value("${spring.datasource.druid.statViewServlet.login-username:}")
+    private String statViewServletLoginUsername;
+
+    @Value("${spring.datasource.druid.statViewServlet.login-password:}")
+    private String statViewServletLoginPassword;
+
+    @Value("${spring.datasource.druid.webStatFilter.url-pattern:/*}")
+    private String webStatFilterUrlPattern;
+
+    @Value("${spring.datasource.druid.webStatFilter.exclusions:*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*}")
+    private String webStatFilterExclusions;
 
     @Bean
     @ConfigurationProperties("spring.datasource.druid.master")
@@ -78,6 +96,43 @@ public class DruidConfig
         }
         catch (Exception e)
         {
+        }
+    }
+
+    /**
+     * Druid 监控页面。
+     */
+    @Bean
+    @ConditionalOnProperty(name = "spring.datasource.druid.statViewServlet.enabled", havingValue = "true")
+    public ServletRegistrationBean<StatViewServlet> druidStatViewServlet()
+    {
+        ServletRegistrationBean<StatViewServlet> registrationBean = new ServletRegistrationBean<>(
+                new StatViewServlet(), statViewServletUrlPattern);
+        addInitParameter(registrationBean, "allow", statViewServletAllow);
+        addInitParameter(registrationBean, "loginUsername", statViewServletLoginUsername);
+        addInitParameter(registrationBean, "loginPassword", statViewServletLoginPassword);
+        return registrationBean;
+    }
+
+    /**
+     * Druid Web 监控过滤器。
+     */
+    @Bean
+    @ConditionalOnProperty(name = "spring.datasource.druid.webStatFilter.enabled", havingValue = "true")
+    public FilterRegistrationBean<WebStatFilter> druidWebStatFilter()
+    {
+        FilterRegistrationBean<WebStatFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new WebStatFilter());
+        registrationBean.addUrlPatterns(webStatFilterUrlPattern);
+        registrationBean.addInitParameter("exclusions", webStatFilterExclusions);
+        return registrationBean;
+    }
+
+    private void addInitParameter(ServletRegistrationBean<?> registrationBean, String name, String value)
+    {
+        if (value != null && !value.isBlank())
+        {
+            registrationBean.addInitParameter(name, value);
         }
     }
 

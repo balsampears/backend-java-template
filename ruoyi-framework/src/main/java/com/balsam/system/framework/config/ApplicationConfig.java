@@ -2,7 +2,7 @@ package com.balsam.system.framework.config;
 
 import java.util.TimeZone;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.jackson.autoconfigure.JsonMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -23,8 +23,8 @@ public class ApplicationConfig
      * 时区配置
      */
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jacksonObjectMapperCustomization()
+    public JsonMapperBuilderCustomizer jsonMapperBuilderCustomizer()
     {
-        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.timeZone(TimeZone.getDefault());
+        return jsonMapperBuilder -> jsonMapperBuilder.defaultTimeZone(TimeZone.getDefault());
     }
 }
